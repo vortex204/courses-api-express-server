@@ -106,7 +106,7 @@ app.post('/api/courses', urlencodedParser, function (req, res) {
     fs.writeFileSync(__dirname + "/data/" + "courses.json", JSON.stringify(data));
    
     console.log('New course saved!');
-    res.status(200).send();
+    res.status(200).json(course);
  })
 
 
