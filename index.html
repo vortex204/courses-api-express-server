@@ -1,0 +1,18 @@
+<body></body>
+<script>
+  async function getCourses() {
+    const response = await fetch("http://localhost:8081/api/courses");
+    const data = await response.json();
+    console.log(data);
+
+    data.forEach((item) => {
+      document.body.innerHTML += `
+                <p>
+                    ${item.courseName}(${item.id}) - ${item.dept}
+                    <a href="details.html?courseid=${item.id}">See Details</a>
+                </p>
+            `;
+    });
+  }
+  getCourses();
+</script>

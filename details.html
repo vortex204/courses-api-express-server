@@ -1,0 +1,39 @@
+<body></body>
+<script>
+  async function getDetails(id) {
+    const response = await fetch("http://localhost:8081/api/courses/" + id);
+    const data = await response.json();
+    console.log(data);
+    document.body.innerHTML = `
+            <h1>NAME: ${data.courseName}</h1>
+            <h2>DEPT: ${data.dept}</h2>
+            <p>Instructor: ${data.instructor}</p>
+            <p>Start Date: ${data.startDate}</p>
+            <p>Duration: ${data.numDays} day${data.numDays == 1 ? "" : "s"}.</p>
+            <p>Course Number: ${data.courseNum}</p>
+            <p>ID: ${data.id}</p>
+        `;
+  }
+  // console.log(location.search)
+  // document.body.innerHTML = location.search;
+
+  const urlParams = new URLSearchParams(location.search);
+  // location.search is the way you access
+  // the query string portion of the URL
+
+  let id = -1;
+  if (urlParams.has("courseid") === true) {
+    id = urlParams.get("courseid");
+    // Now that you know the course id, make an
+    // AJAX call to get that one course
+    // and in the callback, display it.
+    // Hint: you can create the URL you need for
+    // the ajax request by concatenating
+    // "http://localhost:8081pi/courses/" with the id!
+  }
+
+  if (id !== -1) {
+    //is it found by .has() above
+    getDetails(id);
+  }
+</script>
